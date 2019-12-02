@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.footy.R
 import com.example.footy.databinding.HomeFragmentBinding
+import com.example.footy.ui.home_fragment.categories_adapter.CategoryClickListener
+import com.example.footy.ui.home_fragment.categories_adapter.MealCategoriesAdapter
 
 class HomeFragment : Fragment() {
 
@@ -34,12 +36,22 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
-        viewModel.categories.observe(this, Observer {
-            binding.tempTextView.text = it.categories.size.toString()
 
+        val adapter = MealCategoriesAdapter(CategoryClickListener { categoryId ->
+            viewModel.onCategoryClicked(categoryId)
         })
-        //homeTextView.setOnClickListener { view -> view.findNavController().navigate(R.id.action_homeFragment_to_recipeFragment) }
+
+        binding.recycler.adapter = adapter
+
+
+        viewModel.categories.observe(this, Observer {
+            it?.let {
+                adapter.submitList(it.categories)
+            }
+        })
     }
 
 }
+
+
+//homeTextView.setOnClickListener { view -> view.findNavController().navigate(R.id.action_homeFragment_to_recipeFragment) }
