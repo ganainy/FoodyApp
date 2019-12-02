@@ -1,8 +1,8 @@
-package com.example.footy
+package com.example.footy.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.footy.R
 
 class MainActivity : AppCompatActivity() {
 
