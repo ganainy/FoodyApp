@@ -14,12 +14,13 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:padding="4dp"
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
-            tools:itemCount="100" />
+            tools:listitem="@layout/category_item" />
 
     </FrameLayout>
 </layout>
