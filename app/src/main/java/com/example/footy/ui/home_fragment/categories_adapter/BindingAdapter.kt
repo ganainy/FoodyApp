@@ -10,8 +10,8 @@ import com.example.footy.R
 import com.example.footy.network.Category
 import com.example.footy.ui.home_fragment.HomeViewModel
 
-@BindingAdapter("categoryImage")
-fun setCategoryImage(imageView: ImageView, item: Category?) {
+@BindingAdapter("setImage")
+fun setImage(imageView: ImageView, item: Category?) {
     item?.let {
         val imageUri = it.categoryImageUrl.toUri()
         Glide.with(imageView.context)

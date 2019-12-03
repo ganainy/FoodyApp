@@ -29,6 +29,8 @@ class MealCategoriesAdapter(val clickListener: CategoryClickListener) :
             binding.categoryItem = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
+
+
         }
 
         companion object {
@@ -58,6 +60,8 @@ class DiffCallbackCategory : DiffUtil.ItemCallback<Category>() {
     }
 }
 
-class CategoryClickListener(val clickListener: (sleepId: Long) -> Unit) {
-    fun onClick(category: Category) = clickListener(category.idCategory.toLong())
+class CategoryClickListener(val clickListener: (category: Category) -> Unit) {
+    fun onClick(category: Category) {
+        return clickListener(category)
+    }
 }

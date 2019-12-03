@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.footy.R
 import com.example.footy.databinding.HomeFragmentBinding
 import com.example.footy.ui.home_fragment.categories_adapter.CategoryClickListener
@@ -37,8 +38,8 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
-        val adapter = MealCategoriesAdapter(CategoryClickListener { categoryId ->
-            viewModel.onCategoryClicked(categoryId)
+        val adapter = MealCategoriesAdapter(CategoryClickListener { category ->
+            viewModel.onCategoryClicked(category)
         })
 
         binding.recycler.adapter = adapter
@@ -52,6 +53,15 @@ class HomeFragment : Fragment() {
 
         viewModel.categoriesLoadState.observe(this, Observer {
             binding.loadingState = it
+        })
+
+
+        viewModel.navigateToSelectedCategory.observe(this, Observer {
+            if (it != null) {
+                this.findNavController()
+                    .navigate(HomeFragmentDirections.actionHomeFragmentToCategoryFragment(it))
+                viewModel.navigationToCategoryFragmentComplete()
+            }
         })
     }
 

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.footy.network.Category
 import com.example.footy.network.MealApi
 import com.example.footy.network.MealCategories
 import kotlinx.coroutines.CoroutineScope
@@ -23,6 +24,11 @@ class HomeViewModel : ViewModel() {
     private val _categoriesLoadState = MutableLiveData<State>()
     val categoriesLoadState: LiveData<State>
         get() = _categoriesLoadState
+
+
+    private val _navigateToSelectedCategory = MutableLiveData<Category>()
+    val navigateToSelectedCategory: LiveData<Category>
+        get() = _navigateToSelectedCategory
 
 
     init {
@@ -46,10 +52,18 @@ class HomeViewModel : ViewModel() {
                 _categoriesLoadState.value = State.FAILED
             }
 
-            //   _categories.value = response.body()
-
 
         }
+    }
+
+
+    fun navigationToCategoryFragmentComplete() {
+        _navigateToSelectedCategory.value = null
+    }
+
+
+    fun onCategoryClicked(category: Category) {
+        _navigateToSelectedCategory.value = category
     }
 
     override fun onCleared() {
@@ -57,7 +71,4 @@ class HomeViewModel : ViewModel() {
         viewModelJob.cancel()
     }
 
-    fun onCategoryClicked(categoryId: Long) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }
