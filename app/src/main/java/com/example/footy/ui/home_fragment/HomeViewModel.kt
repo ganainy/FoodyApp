@@ -17,25 +17,33 @@ class HomeViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _categories = MutableLiveData<MealCategories>()
-
     val categories: LiveData<MealCategories>
         get() = _categories
+
+    private val _categoriesLoadState = MutableLiveData<State>()
+    val categoriesLoadState: LiveData<State>
+        get() = _categoriesLoadState
 
 
     init {
         getCategories()
     }
 
-    private fun getCategories() {
 
+    enum class State { LOADING, FAILED, SUCCESS }
+
+    private fun getCategories() {
+        _categoriesLoadState.value = State.LOADING
         //must be in coroutine scope to use deffered(special type of job)
         coroutineScope.launch {
             try {
                 val mealCategories = MealApi.retrofitService.getCategoriesAsync()
                     .await() //waiting for result without blocking ui thread
                 _categories.value = mealCategories
+                _categoriesLoadState.value = State.SUCCESS
             } catch (t: Throwable) {
                 Log.i(this.javaClass.name, "${t.message}")
+                _categoriesLoadState.value = State.FAILED
             }
 
             //   _categories.value = response.body()

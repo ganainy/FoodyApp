@@ -5,9 +5,12 @@
 
     <data>
 
+        <variable
+            name="loadingState"
+            type="com.example.footy.ui.home_fragment.HomeViewModel.State" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home_fragment.HomeFragment">
@@ -22,5 +25,18 @@
             app:spanCount="3"
             tools:listitem="@layout/category_item" />
 
-    </FrameLayout>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setLoadingState="@{loadingState}"
+            tools:src="@drawable/ic_connection_error" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>

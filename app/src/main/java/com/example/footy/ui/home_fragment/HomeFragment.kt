@@ -49,6 +49,10 @@ class HomeFragment : Fragment() {
                 adapter.submitList(it.categories)
             }
         })
+
+        viewModel.categoriesLoadState.observe(this, Observer {
+            binding.loadingState = it
+        })
     }
 
 }
