@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.footy.R
 import com.example.footy.network.Category
+import com.example.footy.network.Meal
 import com.example.footy.ui.home_fragment.HomeViewModel
 
 @BindingAdapter("setImage")
@@ -20,6 +21,23 @@ fun setImage(imageView: ImageView, item: Category?) {
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image)
+            )
+            .into(imageView)
+    }
+}
+
+
+@BindingAdapter("setRoundImage")
+fun setRoundImage(imageView: ImageView, item: Meal?) {
+    item?.let {
+        val imageUri = it.strMealThumb.toUri()
+        Glide.with(imageView.context)
+            .load(imageUri)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+                    .circleCrop()
             )
             .into(imageView)
     }

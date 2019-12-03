@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.footy.R
 import com.example.footy.databinding.CategoryFragmentBinding
@@ -39,6 +40,16 @@ class CategoryFragment : Fragment() {
             CategoryViewModelFactory(selectedCategory, requireNotNull(activity).application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(CategoryViewModel::class.java)
 
+
+        val adapter = MealsOfCategoryAdapter(MealClickListener { meal ->
+            println(meal.strMeal)
+        })
+
+        binding.recycler.adapter = adapter
+
+        viewModel.mealList.observe(this, Observer {
+            adapter.submitList(it)
+        })
 
     }
 
