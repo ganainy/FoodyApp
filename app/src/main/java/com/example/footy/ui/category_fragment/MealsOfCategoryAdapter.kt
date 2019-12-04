@@ -2,6 +2,8 @@ package com.example.footy.ui.category_fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,8 +11,12 @@ import com.example.footy.databinding.MealItemBinding
 import com.example.footy.network.Meal
 
 
-class MealsOfCategoryAdapter(val clickListener: MealClickListener) :
-    ListAdapter<Meal, MealsOfCategoryAdapter.ViewHolder>(DiffCallbackMeal()) {
+class MealsOfCategoryAdapter(private val clickListener: MealClickListener) :
+    ListAdapter<Meal, MealsOfCategoryAdapter.ViewHolder>(DiffCallbackMeal()), Filterable {
+
+    var mealList = mutableListOf<Meal>()
+    lateinit var filteredList: MutableList<Meal>
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -22,7 +28,7 @@ class MealsOfCategoryAdapter(val clickListener: MealClickListener) :
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: MealItemBinding) :
+    class ViewHolder private constructor(private val binding: MealItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(clickListener: MealClickListener, item: Meal) {
@@ -42,6 +48,36 @@ class MealsOfCategoryAdapter(val clickListener: MealClickListener) :
             }
         }
     }
+
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
+                val charString = charSequence.toString()
+                filteredList = mutableListOf()
+                if (charString.isEmpty()) {
+                    filteredList = mealList
+
+                } else {
+                    for (meal in mealList) {
+                        if (meal.strMeal.toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(meal)
+                        }
+                    }
+                }
+                val filterResults = FilterResults()
+                filterResults.values = filteredList
+                return filterResults
+            }
+
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+
+                submitList(filterResults.values as MutableList<Meal>?)
+
+            }
+        }
+    }
+
 }
 
 /**

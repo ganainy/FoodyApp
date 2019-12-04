@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.footy.R
 import com.example.footy.databinding.CategoryFragmentBinding
+import com.example.footy.network.Meal
 
 class CategoryFragment : Fragment() {
 
@@ -20,6 +22,7 @@ class CategoryFragment : Fragment() {
     }
 
     private lateinit var viewModel: CategoryViewModel
+    private lateinit var adapter: MealsOfCategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,24 +36,53 @@ class CategoryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //Selected category sent from HomeFragment
         val selectedCategory = CategoryFragmentArgs.fromBundle(arguments!!).selectedCategory
         binding.category = selectedCategory
 
+        //Using factory to pass selected category with creation of ViewModel
         val viewModelFactory =
             CategoryViewModelFactory(selectedCategory, requireNotNull(activity).application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(CategoryViewModel::class.java)
 
 
-        val adapter = MealsOfCategoryAdapter(MealClickListener { meal ->
+        //Pass click listener to adapter and this callback will be called when item is clicked
+        adapter = MealsOfCategoryAdapter(MealClickListener { meal ->
             println(meal.strMeal)
         })
 
+        //set adapter to recycler
         binding.recycler.adapter = adapter
 
+        //result meal list from API
         viewModel.mealList.observe(this, Observer {
             adapter.submitList(it)
+            adapter.mealList = it as MutableList<Meal>
+
+            println("CategoryFragment.onActivityCreated:observe called")
+            setupSearchView()
+            adapter.filter.filter(binding.searchView.query)
+
         })
 
+
     }
+
+    fun setupSearchView() { //do filtering when i type in search or click search
+        binding.searchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(queryString: String): Boolean {
+                adapter.filter.filter(queryString)
+                return false
+            }
+
+            override fun onQueryTextChange(queryString: String): Boolean {
+                adapter.filter.filter(queryString)
+                return false
+            }
+        })
+    }
+
+
 
 }
