@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import com.example.footy.R
 import com.example.footy.databinding.HomeFragmentBinding
 import com.example.footy.ui.list_of_categories_fragment.categories_adapter.CategoryClickListener
 import com.example.footy.ui.list_of_categories_fragment.categories_adapter.MealCategoriesAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeFragment : Fragment() {
 
@@ -42,6 +44,7 @@ class HomeFragment : Fragment() {
             viewModel.onCategoryClicked(category)
         })
 
+        binding.fragment = this
         binding.recycler.adapter = adapter
 
 
@@ -65,7 +68,11 @@ class HomeFragment : Fragment() {
         })
     }
 
+
+    fun openDrawer(): Unit {
+
+        requireNotNull(this.activity).drawerLayout.openDrawer(GravityCompat.START)
+
+    }
+
 }
-
-
-//homeTextView.setOnClickListener { view -> view.findNavController().navigate(R.id.action_homeFragment_to_recipeFragment) }

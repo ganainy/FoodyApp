@@ -8,6 +8,11 @@
         <variable
             name="loadingState"
             type="com.example.footy.ui.list_of_categories_fragment.HomeViewModel.State" />
+
+        <variable
+            name="fragment"
+            type="com.example.footy.ui.list_of_categories_fragment.HomeFragment" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -52,16 +57,12 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/search_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:queryHint="Search meal by name">
-
-                    </androidx.appcompat.widget.SearchView>
+                    <ImageView
+                        android:id="@+id/menuImageView"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:onClick="@{()->fragment.openDrawer()}"
+                        android:src="@drawable/ic_menu" />
 
                 </androidx.appcompat.widget.Toolbar>
 
