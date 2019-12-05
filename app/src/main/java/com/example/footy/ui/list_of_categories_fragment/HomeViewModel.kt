@@ -1,4 +1,4 @@
-package com.example.footy.ui.home_fragment
+package com.example.footy.ui.list_of_categories_fragment
 
 import android.util.Log
 import androidx.lifecycle.LiveData

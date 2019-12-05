@@ -11,7 +11,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.footy.ui.home_fragment.categories_adapter.CategoryClickListener" />
+            type="com.example.footy.ui.list_of_categories_fragment.categories_adapter.CategoryClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="@drawable/round_edge_grey_rectangle">
+        android:background="@drawable/round_edge_rectangle">
 
         <TextView
             android:id="@+id/categoryName"
@@ -42,7 +42,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="8dp"
-            app:setImage="@{categoryItem}"
+            app:setImage="@{categoryItem.categoryImageUrl}"
             app:layout_constraintBottom_toTopOf="@+id/categoryName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

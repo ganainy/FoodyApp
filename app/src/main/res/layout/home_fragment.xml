@@ -7,11 +7,12 @@
 
         <variable
             name="loadingState"
-            type="com.example.footy.ui.home_fragment.HomeViewModel.State" />
+            type="com.example.footy.ui.list_of_categories_fragment.HomeViewModel.State" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
+        android:background="@color/lightGrey"
         android:layout_height="match_parent">
 
 
@@ -73,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:context=".ui.home_fragment.HomeFragment">
+            tools:context=".ui.list_of_categories_fragment.HomeFragment">
 
             <TextView
                 android:id="@+id/textView"

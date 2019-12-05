@@ -1,4 +1,4 @@
-package com.example.footy.ui.category_fragment
+package com.example.footy.ui.list_of_meals_fragment
 
 import android.app.Application
 import android.util.Log
@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.footy.network.Category
 import com.example.footy.network.Meal
 import com.example.footy.network.MealApi
-import com.example.footy.ui.home_fragment.HomeViewModel
+import com.example.footy.ui.list_of_categories_fragment.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -25,6 +25,11 @@ class CategoryViewModel(category: Category, app: Application) : AndroidViewModel
         get() {
             return _mealLoadState
         }
+
+
+    private val _navigateToSelectedRecipe = MutableLiveData<Meal>()
+    val navigateToSelectedRecipe: LiveData<Meal>
+        get() = _navigateToSelectedRecipe
 
 
     private val _mealList: MutableLiveData<List<Meal>> = MutableLiveData()
@@ -64,6 +69,19 @@ class CategoryViewModel(category: Category, app: Application) : AndroidViewModel
 
 
         }
+    }
+
+
+    /*fun addToFavourites(meal:Meal) {
+
+    }*/
+    fun navigationToRecipeFragmentComplete() {
+        _navigateToSelectedRecipe.value = null
+    }
+
+
+    fun onRecipeClicked(meal: Meal) {
+        _navigateToSelectedRecipe.value = meal
     }
 
 

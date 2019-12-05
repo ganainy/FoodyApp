@@ -1,4 +1,4 @@
-package com.example.footy.ui.category_fragment
+package com.example.footy.ui.list_of_meals_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.footy.R
 import com.example.footy.databinding.CategoryFragmentBinding
 import com.example.footy.network.Meal
@@ -49,6 +50,16 @@ class CategoryFragment : Fragment() {
         //Pass click listener to adapter and this callback will be called when item is clicked
         adapter = MealsOfCategoryAdapter(MealClickListener { meal ->
             println(meal.strMeal)
+            viewModel.onRecipeClicked(meal)
+        })
+
+        //navigate to recipe fragment when meal is clicked
+        viewModel.navigateToSelectedRecipe.observe(this, Observer {
+            if (it != null) {
+                this.findNavController()
+                    .navigate(CategoryFragmentDirections.actionCategoryFragmentToRecipeFragment(it))
+                viewModel.navigationToRecipeFragmentComplete()
+            }
         })
 
         //set adapter to recycler

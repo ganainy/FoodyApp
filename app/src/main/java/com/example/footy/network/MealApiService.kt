@@ -31,6 +31,9 @@ interface MealApiService {
 
     @GET("filter.php")
     fun getMealsOfCategoryAsync(@Query("c") categoryName: String): Deferred<MealsOfCertainCategory>
+
+    @GET("lookup.php")
+    fun getRecipeAsync(@Query("i") mealId: Int): Deferred<Recipe>
 }
 
 //what rest of app will use so we don't have multiple retrofit instances

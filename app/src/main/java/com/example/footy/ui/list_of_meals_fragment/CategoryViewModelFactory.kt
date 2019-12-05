@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.example.footy.ui.category_fragment
+package com.example.footy.ui.list_of_meals_fragment
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

@@ -9,7 +9,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.footy.ui.category_fragment.MealClickListener" />
+            type="com.example.footy.ui.list_of_meals_fragment.MealClickListener" />
 
         <variable
             name="meal"
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@drawable/round_edge_grey_rectangle"
+        android:background="@drawable/round_edge_rectangle"
         android:onClick="@{()->clickListener.onClick(meal)}">
 
 

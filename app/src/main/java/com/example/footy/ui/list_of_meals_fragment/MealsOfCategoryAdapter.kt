@@ -1,4 +1,4 @@
-package com.example.footy.ui.category_fragment
+package com.example.footy.ui.list_of_meals_fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

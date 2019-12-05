@@ -7,25 +7,38 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.footy.ui.home_fragment.HomeFragment"
+        android:name="com.example.footy.ui.list_of_categories_fragment.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.example.footy.ui.recipe_fragment.RecipeFragment"
         android:label="recipe_fragment"
-        tools:layout="@layout/recipe_fragment" />
+        tools:layout="@layout/recipe_fragment">
+
+
+        <argument
+            android:name="meal"
+            app:argType="com.example.footy.network.Meal" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.example.footy.ui.category_fragment.CategoryFragment"
+        android:name="com.example.footy.ui.list_of_meals_fragment.CategoryFragment"
         android:label="category_fragment"
         tools:layout="@layout/category_fragment">
         <argument
             android:name="selectedCategory"
             app:argType="com.example.footy.network.Category" />
+        <action
+            android:id="@+id/action_categoryFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
     </fragment>
 </navigation>

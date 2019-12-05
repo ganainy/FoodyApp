@@ -8,4 +8,7 @@
     <color name="red">#EE810101</color>
     <color name="black">#000000</color>
     <color name="yellow">#FFEB3B</color>
+    <color name="lightGrey">#9CDDDBDB</color>
+    <color name="shadow_bg">#7F000000</color>
+    <color name="white">#ffffff</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.footy.ui.home_fragment.categories_adapter
+package com.example.footy.ui.list_of_categories_fragment.categories_adapter
 
 import android.view.View
 import android.widget.ImageView
@@ -7,14 +7,13 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.footy.R
-import com.example.footy.network.Category
 import com.example.footy.network.Meal
-import com.example.footy.ui.home_fragment.HomeViewModel
+import com.example.footy.ui.list_of_categories_fragment.HomeViewModel
 
 @BindingAdapter("setImage")
-fun setImage(imageView: ImageView, item: Category?) {
-    item?.let {
-        val imageUri = it.categoryImageUrl.toUri()
+fun setImage(imageView: ImageView, imgString: String?) {
+    imgString?.let {
+        val imageUri = imgString.toUri()
         Glide.with(imageView.context)
             .load(imageUri)
             .apply(

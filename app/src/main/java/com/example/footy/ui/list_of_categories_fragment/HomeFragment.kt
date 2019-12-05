@@ -1,4 +1,4 @@
-package com.example.footy.ui.home_fragment
+package com.example.footy.ui.list_of_categories_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.footy.R
 import com.example.footy.databinding.HomeFragmentBinding
-import com.example.footy.ui.home_fragment.categories_adapter.CategoryClickListener
-import com.example.footy.ui.home_fragment.categories_adapter.MealCategoriesAdapter
+import com.example.footy.ui.list_of_categories_fragment.categories_adapter.CategoryClickListener
+import com.example.footy.ui.list_of_categories_fragment.categories_adapter.MealCategoriesAdapter
 
 class HomeFragment : Fragment() {
 
