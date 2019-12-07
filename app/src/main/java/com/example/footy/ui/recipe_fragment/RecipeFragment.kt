@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.footy.Helper
 import com.example.footy.R
+import com.example.footy.database.IngredientDatabase
 import com.example.footy.databinding.RecipeFragmentBinding
 import com.example.footy.network.Ingredient
 
@@ -39,13 +40,17 @@ class RecipeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val application = requireNotNull(activity).application
+        val dataSource = IngredientDatabase.getInstance(application).ingredientDatabaseDao
+
         binding.fragment = this
         //Selected meal sent from CategoryFragment
         val selectedMeal = RecipeFragmentArgs.fromBundle(arguments!!).meal
 
         val recipeViewModelFactory = RecipeViewModelFactory(
             selectedMeal.idMeal.toInt(),
-            requireNotNull(activity).application
+            application,
+            dataSource
         )
         viewModel =
             ViewModelProviders.of(this, recipeViewModelFactory).get(RecipeViewModel::class.java)
@@ -76,6 +81,16 @@ class RecipeFragment : Fragment() {
             }
         })
 
+
+        viewModel.isFavorite.observe(this, Observer {
+            if (it) binding.favoriteImage.setImageResource(R.drawable.ic_favorite_red)
+            else binding.favoriteImage.setImageResource(R.drawable.ic_favorite_white)
+        })
+
+
+        /* viewModel.duplicate.observe(this, Observer {
+             Toast.makeText(context,"$it is already in your favourites", Toast.LENGTH_LONG).show()
+         })*/
     }
 
     private fun showIngredients(ingredient: Ingredient) {

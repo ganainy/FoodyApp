@@ -2,7 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/about"
+        android:id="@+id/favouritesFragment"
+        android:icon="@drawable/ic_favorite_red"
+        android:title="My favourite meals" />
+
+    <item
+        android:id="@+id/aboutFragment"
         android:icon="@drawable/ic_info_black_24dp"
         android:title="About me" />
 </menu>

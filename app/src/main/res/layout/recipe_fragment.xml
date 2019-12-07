@@ -283,11 +283,13 @@
                             android:layout_weight="1" />
 
                         <ImageView
+                            android:id="@+id/favoriteImage"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
-                            tools:src="@drawable/ic_favorite_white" />
+                            android:onClick="@{()-> viewModel.addOrDeleteToDB(recipe.meals[0])}"
+                            android:src="@drawable/ic_favorite_white" />
 
 
                     </LinearLayout>

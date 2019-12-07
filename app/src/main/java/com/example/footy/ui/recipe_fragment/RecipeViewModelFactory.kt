@@ -19,18 +19,20 @@ package com.example.footy.ui.recipe_fragment
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.footy.database.IngredientDatabaseDao
 
 /**
  * Simple ViewModel factory that provides the MarsProperty and context to the ViewModel.
  */
 class RecipeViewModelFactory(
     private val id: Int,
-    private val application: Application
+    private val application: Application,
+    private val database: IngredientDatabaseDao
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RecipeViewModel::class.java)) {
-            return RecipeViewModel(id, application) as T
+            return RecipeViewModel(id, application, database) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

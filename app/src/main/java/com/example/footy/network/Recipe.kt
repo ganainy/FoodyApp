@@ -1,12 +1,19 @@
 package com.example.footy.network
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 
 data class Recipe(
     val meals: List<Ingredient>
 )
 
-
+@Entity(tableName = "ingredient_table")
 data class Ingredient(
+
+    @PrimaryKey(autoGenerate = true)
+    var databaseIngredientId: Long = 0L,
+
     val idMeal: String?,
     val strArea: String?,
     val strCategory: String?,

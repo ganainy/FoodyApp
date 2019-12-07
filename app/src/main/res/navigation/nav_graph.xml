@@ -41,4 +41,8 @@
             android:id="@+id/action_categoryFragment_to_recipeFragment"
             app:destination="@id/recipeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.example.footy.ui.favourite_meals_fragment.FavouritesFragment"
+        android:label="FavouritesFragment" />
 </navigation>
