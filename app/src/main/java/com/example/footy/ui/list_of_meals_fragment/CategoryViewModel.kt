@@ -52,7 +52,10 @@ class CategoryViewModel(category: Category, app: Application) : AndroidViewModel
     }
 
 
-    private fun getMealsOfCategory(categoryName: String) {
+    fun getMealsOfCategory(categoryName: String) {
+
+        if (_mealList.value != null) return
+
         _mealLoadState.value = HomeViewModel.State.LOADING
         //must be in coroutine scope to use deffered(special type of job)
         coroutineScope.launch {

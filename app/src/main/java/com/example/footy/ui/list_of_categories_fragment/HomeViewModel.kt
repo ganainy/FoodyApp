@@ -1,6 +1,5 @@
 package com.example.footy.ui.list_of_categories_fragment
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,7 +37,10 @@ class HomeViewModel : ViewModel() {
 
     enum class State { LOADING, FAILED, SUCCESS }
 
-    private fun getCategories() {
+    fun getCategories() {
+        if (_categories.value != null) {
+            return
+        }
         _categoriesLoadState.value = State.LOADING
         //must be in coroutine scope to use deffered(special type of job)
         coroutineScope.launch {
@@ -48,7 +50,7 @@ class HomeViewModel : ViewModel() {
                 _categories.value = mealCategories
                 _categoriesLoadState.value = State.SUCCESS
             } catch (t: Throwable) {
-                Log.i(this.javaClass.name, "${t.message}")
+                println("HomeViewModel.getCategories:${t.message}")
                 _categoriesLoadState.value = State.FAILED
             }
 

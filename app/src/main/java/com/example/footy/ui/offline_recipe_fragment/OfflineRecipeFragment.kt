@@ -1,5 +1,6 @@
 package com.example.footy.ui.offline_recipe_fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.example.footy.databinding.OfflineRecipeFragmentBinding
 import com.example.footy.network.Ingredient
 import com.example.footy.utils.Helper
 import com.example.footy.utils.filterIngredientsList
+
 
 class OfflineRecipeFragment : Fragment() {
 
@@ -52,7 +54,7 @@ class OfflineRecipeFragment : Fragment() {
         viewModel =
             ViewModelProviders.of(this, viewModelFactory).get(OfflineRecipeViewModel::class.java)
 
-        binding.viewModel = viewModel
+
 
         viewModel.ingredient.observe(this, Observer {
             binding.ingredient = it
@@ -61,7 +63,7 @@ class OfflineRecipeFragment : Fragment() {
 
         viewModel.deleteDone.observe(this, Observer {
             if (it != null) {
-                binding.favoriteImage.visibility = View.GONE
+                binding.deleteImage.visibility = View.GONE
                 Toast.makeText(context, "Recipe deleted from your favourites", Toast.LENGTH_LONG).show()
                 println("OfflineRecipeFragment.onActivityCreated:${view?.findNavController()?.currentDestination?.label}")
                 this.findNavController()
@@ -92,6 +94,20 @@ class OfflineRecipeFragment : Fragment() {
 
     fun navigateUp(): Unit {
         activity?.onBackPressed()
+    }
+
+    fun confirmDelete(): Unit {
+
+        AlertDialog.Builder(activity)
+            .setMessage("Are you sure you want to delete recipe from favourites?")
+            .setPositiveButton(
+                "Yes"
+            ) { _, _ ->
+                viewModel.deleteFromDB()
+            }
+            .setNegativeButton("No", null)
+            .setIcon(R.drawable.ic_delete_forever_black_24dp)
+            .show()
     }
 
 }

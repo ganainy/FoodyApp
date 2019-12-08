@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.footy.R
 import com.example.footy.databinding.CategoryFragmentBinding
 import com.example.footy.network.Meal
+import com.example.footy.utils.ConnectionBroadcastReceiver
 
 class CategoryFragment : Fragment() {
 
@@ -81,7 +82,24 @@ class CategoryFragment : Fragment() {
             binding.loadingState = it
         })
 
+
+        ConnectionBroadcastReceiver.registerToFragmentAndAutoUnregister(
+            activity!!,
+            this,
+            object : ConnectionBroadcastReceiver() {
+                override fun onConnectionChanged(hasConnection: Boolean) {
+                    println("FavouritesFragment.onConnectionChanged:$hasConnection")
+                    if (hasConnection) {
+                        viewModel.getMealsOfCategory(selectedCategory.categoryName)
+                    }
+                }
+            })
+
     }
+
+
+
+
 
     fun setupSearchView() { //do filtering when i type in search or click search
         binding.searchView.setOnQueryTextListener(object :

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,6 +17,7 @@ import com.example.footy.R
 import com.example.footy.database.IngredientDatabase
 import com.example.footy.databinding.RecipeFragmentBinding
 import com.example.footy.network.Ingredient
+import com.example.footy.utils.ConnectionBroadcastReceiver
 import com.example.footy.utils.Helper
 import com.example.footy.utils.filterIngredientsList
 
@@ -84,16 +86,33 @@ class RecipeFragment : Fragment() {
             }
         })
 
-
+        //set favorite image depending on is meal in favorites or not
         viewModel.isFavorite.observe(this, Observer {
             if (it) binding.favoriteImage.setImageResource(R.drawable.ic_favorite_red)
             else binding.favoriteImage.setImageResource(R.drawable.ic_favorite_white)
         })
 
-
+        //this state used to show loading or internt error in layout
         viewModel.recipeLoadState.observe(this, Observer {
             binding.loadState = it
         })
+
+        //show toast on adding or deleting to favourites
+        viewModel.toast.observe(this, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+        })
+
+        ConnectionBroadcastReceiver.registerToFragmentAndAutoUnregister(
+            activity!!,
+            this,
+            object : ConnectionBroadcastReceiver() {
+                override fun onConnectionChanged(hasConnection: Boolean) {
+                    println("FavouritesFragment.onConnectionChanged:$hasConnection")
+                    if (hasConnection) {
+                        viewModel.getSpecificRecipe(mealId)
+                    }
+                }
+            })
     }
 
 

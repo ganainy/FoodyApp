@@ -33,6 +33,13 @@ class RecipeViewModel(
             return _recipeLoadState
         }
 
+    private val _toast: MutableLiveData<String> = MutableLiveData()
+    val toast: LiveData<String>
+        get() {
+            return _toast
+        }
+
+
     private val _isFavorite: MutableLiveData<Boolean> = MutableLiveData()
     val isFavorite: LiveData<Boolean>
         get() {
@@ -52,7 +59,10 @@ class RecipeViewModel(
         mDatabase = database
     }
 
-    private fun getSpecificRecipe(mealBackendId: Int) {
+    fun getSpecificRecipe(mealBackendId: Int) {
+
+        if (_recipe.value != null) return
+
         _recipeLoadState.value = HomeViewModel.State.LOADING
         coroutineScope.launch {
             try {
@@ -81,6 +91,7 @@ class RecipeViewModel(
     }
 
 
+
     fun addOrDeleteToDB(ingredient: Ingredient): Unit {
         coroutineScope.launch {
             withContext(Dispatchers.IO) {
@@ -89,9 +100,11 @@ class RecipeViewModel(
                     //meal already in database
                     mDatabase.deleteRecipeById(ingredient.idMeal)
                     _isFavorite.postValue(false)
+                    _toast.postValue("Removed ${ingredient.strMeal} from your favourites.")
                 } else {
                     mDatabase.insert(ingredient)
                     _isFavorite.postValue(true)
+                    _toast.postValue("Added ${ingredient.strMeal} to your favourites.")
                 }
 
             }

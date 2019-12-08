@@ -14,6 +14,7 @@ import com.example.footy.R
 import com.example.footy.databinding.HomeFragmentBinding
 import com.example.footy.ui.list_of_categories_fragment.categories_adapter.CategoryClickListener
 import com.example.footy.ui.list_of_categories_fragment.categories_adapter.MealCategoriesAdapter
+import com.example.footy.utils.ConnectionBroadcastReceiver
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeFragment : Fragment() {
@@ -66,8 +67,24 @@ class HomeFragment : Fragment() {
                 viewModel.navigationToCategoryFragmentComplete()
             }
         })
-    }
 
+
+
+
+        ConnectionBroadcastReceiver.registerToFragmentAndAutoUnregister(
+            activity!!,
+            this,
+            object : ConnectionBroadcastReceiver() {
+                override fun onConnectionChanged(hasConnection: Boolean) {
+                    println("FavouritesFragment.onConnectionChanged:$hasConnection")
+                    if (hasConnection) {
+                        viewModel.getCategories()
+                    }
+                }
+            })
+
+
+    }
 
     fun openDrawer(): Unit {
 
