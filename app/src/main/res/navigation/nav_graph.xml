@@ -41,8 +41,24 @@
             android:id="@+id/action_categoryFragment_to_recipeFragment"
             app:destination="@id/recipeFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="com.example.footy.ui.favourite_meals_fragment.FavouritesFragment"
-        android:label="FavouritesFragment" />
+        android:label="FavouritesFragment">
+        <action
+            android:id="@+id/action_favouritesFragment_to_offlineRecipeFragment"
+            app:destination="@id/offlineRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/offlineRecipeFragment"
+        android:name="com.example.footy.ui.offline_recipe_fragment.OfflineRecipeFragment"
+        android:label="OfflineRecipeFragment">
+        <action
+            android:id="@+id/action_offlineRecipeFragment_to_favouritesFragment"
+            app:destination="@id/favouritesFragment" />
+    </fragment>
+
+
 </navigation>

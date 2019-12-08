@@ -2,6 +2,7 @@ package com.example.footy.ui.list_of_categories_fragment.categories_adapter
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -29,7 +30,7 @@ fun setImage(imageView: ImageView, imgString: String?) {
 @BindingAdapter("setRoundImage")
 fun setRoundImage(imageView: ImageView, item: Meal?) {
     item?.let {
-        val imageUri = it.strMealThumb.toUri()
+        val imageUri = it.strMealThumb?.toUri()
         Glide.with(imageView.context)
             .load(imageUri)
             .apply(
@@ -57,5 +58,16 @@ fun ImageView.setTheLoadingState(state: HomeViewModel.State) {
         HomeViewModel.State.SUCCESS -> {
             View.GONE
         }
+    }
+
+}
+
+
+@BindingAdapter("setVisibility")
+fun TextView.setVisibility(favouriteListSize: Int): Unit {
+    visibility = if (favouriteListSize == 0) {
+        View.VISIBLE
+    } else {
+        View.GONE
     }
 }

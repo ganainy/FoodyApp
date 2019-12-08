@@ -18,6 +18,19 @@ class FavouritesViewModel(val database: IngredientDatabaseDao, application: Appl
             return _favouriteMeals
         }
 
+    private val _navigateToOfflineRecipeFragment = MutableLiveData<String>()
+    val navigateToOfflineRecipeFragment: LiveData<String>
+        get() {
+            return _navigateToOfflineRecipeFragment
+        }
+
+    private val _favouriteListSize = MutableLiveData<Int>()
+    val favouriteListSize: LiveData<Int>
+        get() {
+            return _favouriteListSize
+        }
+
+
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -31,9 +44,24 @@ class FavouritesViewModel(val database: IngredientDatabaseDao, application: Appl
     private suspend fun getFavouriteMeals() {
 
         withContext(Dispatchers.IO) {
-            _favouriteMeals.postValue(database.getAllIngredients())
+            val allIngredients = database.getAllIngredients()
+            _favouriteMeals.postValue(allIngredients)
+            _favouriteListSize.postValue(allIngredients.size)
         }
 
     }
 
+    fun onRecipeClicked(ClickedMealID: String) {
+        _navigateToOfflineRecipeFragment.value = ClickedMealID
+    }
+
+    fun navigationToRecipeFragmentComplete() {
+        _navigateToOfflineRecipeFragment.value = null
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 }

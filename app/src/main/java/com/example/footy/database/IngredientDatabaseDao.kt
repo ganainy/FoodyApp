@@ -30,33 +30,18 @@ interface IngredientDatabaseDao {
     @Insert
     fun insert(ingredient: Ingredient)
 
-
-    /**
-     * Selects and returns the row that matches the supplied start time, which is our key.
-     *
-     * @param key startTimeMilli to match
-     */
-    @Query("SELECT * from ingredient_table WHERE databaseIngredientId = :key")
-    fun get(key: Long): Ingredient?
-
-    /**
-     * Deletes all values from the table.
-     *
-     * This does not delete the table, only its contents.
-     */
     @Query("DELETE FROM ingredient_table")
     fun clearAll()
 
 
-    @Query("DELETE FROM ingredient_table where strMeal==:name")
-    fun delete(name: String?)
+    @Query("SELECT * FROM ingredient_table WHERE idMeal=:id")
+    fun getRecipeByID(id: String): Ingredient
 
-    /**
-     * Selects and returns all rows in the table,
-     *
-     * sorted by start time in descending order.
-     */
-    @Query("SELECT * FROM ingredient_table ORDER BY databaseIngredientId DESC")
+    @Query("DELETE FROM ingredient_table where idMeal==:id")
+    fun deleteRecipeById(id: String?)
+
+
+    @Query("SELECT * FROM ingredient_table ")
     fun getAllIngredients(): List<Ingredient>
 
 

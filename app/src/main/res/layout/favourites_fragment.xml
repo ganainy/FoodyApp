@@ -8,6 +8,10 @@
         <variable
             name="category"
             type="com.example.footy.network.Category" />
+
+        <variable
+            name="viewModel"
+            type="com.example.footy.ui.favourite_meals_fragment.FavouritesViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -34,7 +38,6 @@
 
 
                 <ImageView
-                    android:id="@+id/htab_header"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
@@ -51,16 +54,15 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/search_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:id="@+id/backImage"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_arrow"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:queryHint="Search meal by name">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    </androidx.appcompat.widget.SearchView>
 
                 </androidx.appcompat.widget.Toolbar>
 
@@ -74,11 +76,18 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:context=".ui.list_of_meals_fragment.CategoryFragment">
 
-            <!--<TextView
-                android:id="@+id/categoryTextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@{category.categoryName}" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/proximanovaregular"
+                android:text="You don't have any favourite meals yet."
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setVisibility="@{viewModel.favouriteListSize}" />
 
 
             <androidx.recyclerview.widget.RecyclerView

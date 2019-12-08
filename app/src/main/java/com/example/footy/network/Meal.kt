@@ -11,6 +11,6 @@ data class MealsOfCertainCategory(
 @Parcelize
 data class Meal(
     val idMeal: String,
-    val strMeal: String,
-    val strMealThumb: String
+    val strMeal: String?,
+    val strMealThumb: String?
 ) : Parcelable

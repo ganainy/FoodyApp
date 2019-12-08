@@ -1,4 +1,4 @@
-package com.example.footy;
+package com.example.footy.utils;
 
 import android.util.Log;
 import android.view.View;

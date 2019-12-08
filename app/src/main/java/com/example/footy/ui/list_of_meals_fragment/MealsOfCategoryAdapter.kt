@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.footy.databinding.MealItemBinding
 import com.example.footy.network.Meal
+import java.util.*
 
 
 class MealsOfCategoryAdapter(private val clickListener: MealClickListener) :
@@ -60,7 +61,12 @@ class MealsOfCategoryAdapter(private val clickListener: MealClickListener) :
 
                 } else {
                     for (meal in mealList) {
-                        if (meal.strMeal.toLowerCase().contains(charString.toLowerCase())) {
+                        if (meal.strMeal?.toLowerCase(Locale.ENGLISH)?.contains(
+                                charString.toLowerCase(
+                                    Locale.ENGLISH
+                                )
+                            )!!
+                        ) {
                             filteredList.add(meal)
                         }
                     }

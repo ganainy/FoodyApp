@@ -27,12 +27,6 @@ class RecipeViewModel(
         }
 
 
-    private val _duplicate: MutableLiveData<String> = MutableLiveData()
-    val duplicate: LiveData<String>
-        get() {
-            return _duplicate
-        }
-
     private val _isFavorite: MutableLiveData<Boolean> = MutableLiveData()
     val isFavorite: LiveData<Boolean>
         get() {
@@ -66,6 +60,7 @@ class RecipeViewModel(
     }
 
 
+
     private suspend fun getFavoriteStatus(strMeal: String?) {
 
         withContext(Dispatchers.IO)
@@ -84,7 +79,7 @@ class RecipeViewModel(
                 val favoriteIngredientsNames = mDatabase.getFavoriteIngredientsNames()
                 if (favoriteIngredientsNames.contains(ingredient.strMeal)) {
                     //meal already in database
-                    mDatabase.delete(ingredient.strMeal)
+                    mDatabase.deleteRecipeById(ingredient.idMeal)
                     _isFavorite.postValue(false)
                 } else {
                     mDatabase.insert(ingredient)
@@ -98,5 +93,11 @@ class RecipeViewModel(
 
     fun openYoutube(youtubeLink: String) {
         _ytLink.value = youtubeLink
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }

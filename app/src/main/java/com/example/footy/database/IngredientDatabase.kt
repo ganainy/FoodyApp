@@ -29,7 +29,7 @@ import com.example.footy.network.Ingredient
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [Ingredient::class], version = 1, exportSchema = false)
+@Database(entities = [Ingredient::class], version = 2, exportSchema = false)
 abstract class IngredientDatabase : RoomDatabase() {
 
     /**

@@ -1,7 +1,9 @@
 package com.example.footy.network
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 
 data class Recipe(
@@ -9,12 +11,12 @@ data class Recipe(
 )
 
 @Entity(tableName = "ingredient_table")
+@Parcelize
 data class Ingredient(
 
-    @PrimaryKey(autoGenerate = true)
-    var databaseIngredientId: Long = 0L,
 
-    val idMeal: String?,
+    @PrimaryKey
+    val idMeal: String,
     val strArea: String?,
     val strCategory: String?,
     val strIngredient1: String?,
@@ -63,4 +65,4 @@ data class Ingredient(
     val strYoutube: String?
 
 
-)
+) : Parcelable
