@@ -91,9 +91,9 @@ class RecipeFragment : Fragment() {
         })
 
 
-        /* viewModel.duplicate.observe(this, Observer {
-             Toast.makeText(context,"$it is already in your favourites", Toast.LENGTH_LONG).show()
-         })*/
+        viewModel.recipeLoadState.observe(this, Observer {
+            binding.loadState = it
+        })
     }
 
 

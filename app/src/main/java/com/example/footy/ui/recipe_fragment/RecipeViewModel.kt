@@ -8,6 +8,7 @@ import com.example.footy.database.IngredientDatabaseDao
 import com.example.footy.network.Ingredient
 import com.example.footy.network.MealApi
 import com.example.footy.network.Recipe
+import com.example.footy.ui.list_of_categories_fragment.HomeViewModel
 import kotlinx.coroutines.*
 
 class RecipeViewModel(
@@ -26,6 +27,11 @@ class RecipeViewModel(
             return _recipe
         }
 
+    private val _recipeLoadState: MutableLiveData<HomeViewModel.State> = MutableLiveData()
+    val recipeLoadState: LiveData<HomeViewModel.State>
+        get() {
+            return _recipeLoadState
+        }
 
     private val _isFavorite: MutableLiveData<Boolean> = MutableLiveData()
     val isFavorite: LiveData<Boolean>
@@ -47,14 +53,16 @@ class RecipeViewModel(
     }
 
     private fun getSpecificRecipe(mealBackendId: Int) {
-
+        _recipeLoadState.value = HomeViewModel.State.LOADING
         coroutineScope.launch {
             try {
                 val recipe = MealApi.retrofitService.getRecipeAsync(mealBackendId).await()
                 getFavoriteStatus(recipe.meals[0].strMeal) //after loading meal check if it is in favorites
                 _recipe.value = recipe
+                _recipeLoadState.value = HomeViewModel.State.SUCCESS
             } catch (t: Throwable) {
                 println("RecipeViewModel.getSpecificRecipe:${t.message}")
+                _recipeLoadState.value = HomeViewModel.State.FAILED
             }
         }
     }

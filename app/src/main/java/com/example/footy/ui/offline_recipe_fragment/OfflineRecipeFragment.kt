@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.footy.R
 import com.example.footy.database.IngredientDatabase
@@ -59,9 +60,14 @@ class OfflineRecipeFragment : Fragment() {
         })
 
         viewModel.deleteDone.observe(this, Observer {
-            binding.favoriteImage.visibility = View.GONE
-            Toast.makeText(context, "Recipe deleted from your favourites", Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_offlineRecipeFragment_to_favouritesFragment)
+            if (it != null) {
+                binding.favoriteImage.visibility = View.GONE
+                Toast.makeText(context, "Recipe deleted from your favourites", Toast.LENGTH_LONG).show()
+                println("OfflineRecipeFragment.onActivityCreated:${view?.findNavController()?.currentDestination?.label}")
+                this.findNavController()
+                    .navigate(R.id.action_offlineRecipeFragment_to_favouritesFragment)
+                viewModel.navigationComplete()
+            }
         })
 
     }

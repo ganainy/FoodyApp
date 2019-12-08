@@ -3,6 +3,7 @@ package com.example.footy.ui.list_of_categories_fragment.categories_adapter
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -69,5 +70,21 @@ fun TextView.setVisibility(favouriteListSize: Int): Unit {
         View.VISIBLE
     } else {
         View.GONE
+    }
+}
+
+
+@BindingAdapter("setVisibility")
+fun ConstraintLayout.setVisibility(state: HomeViewModel.State) {
+    visibility = when (state) {
+        HomeViewModel.State.LOADING -> {
+            View.GONE
+        }
+        HomeViewModel.State.FAILED -> {
+            View.GONE
+        }
+        HomeViewModel.State.SUCCESS -> {
+            View.VISIBLE
+        }
     }
 }

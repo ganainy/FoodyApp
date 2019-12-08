@@ -8,6 +8,10 @@
         <variable
             name="category"
             type="com.example.footy.network.Category" />
+
+        <variable
+            name="loadingState"
+            type="com.example.footy.ui.list_of_categories_fragment.HomeViewModel.State" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -72,13 +76,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
             tools:context=".ui.list_of_meals_fragment.CategoryFragment">
 
-            <!--<TextView
-                android:id="@+id/categoryTextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@{category.categoryName}" />-->
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setLoadingState="@{loadingState}" />
 
 
             <androidx.recyclerview.widget.RecyclerView

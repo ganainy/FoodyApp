@@ -70,17 +70,15 @@ class FavouritesFragment : Fragment() {
 
         viewModel.navigateToOfflineRecipeFragment.observe(this, Observer {
             if (it != null) {
-                // this.findNavController().navigate(FavouritesFragmentDirections.actionFavouritesFragmentToRecipeFragment(it))
-                val b = Bundle()
-                b.putString("id", it)
-                this.findNavController()
-                    .navigate(R.id.action_favouritesFragment_to_offlineRecipeFragment, b)
+                this.findNavController().navigate(
+                    FavouritesFragmentDirections.actionFavouritesFragmentToOfflineRecipeFragment(it)
+                )
                 viewModel.navigationToRecipeFragmentComplete()
             }
         })
 
-
-
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         binding.backImage.setOnClickListener {
             activity?.onBackPressed()

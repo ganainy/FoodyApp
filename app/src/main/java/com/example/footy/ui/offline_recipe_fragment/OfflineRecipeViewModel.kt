@@ -57,4 +57,13 @@ class OfflineRecipeViewModel(
         }
 
     }
+
+    fun navigationComplete() {
+        _deleteDone.value = null
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewmodelJob.cancel()
+    }
 }

@@ -77,6 +77,10 @@ class CategoryFragment : Fragment() {
         })
 
 
+        viewModel.mealLoadState.observe(this, Observer {
+            binding.loadingState = it
+        })
+
     }
 
     fun setupSearchView() { //do filtering when i type in search or click search
