@@ -36,13 +36,33 @@
                 app:titleEnabled="false">
 
 
-                <ImageView
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.airbnb.lottie.LottieAnimationView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/favorite_cover"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="false"
+                        app:lottie_rawRes="@raw/favourite2"
+                        app:lottie_speed="1"
                     app:layout_collapseMode="parallax" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_gravity="bottom"
+                        android:background="@color/shadow_bg"
+                        android:fontFamily="@font/proximanovaregular"
+                        android:gravity="center_vertical"
+                        android:text="   Favourite meals"
+                        android:textColor="@color/white"
+                        android:textSize="24sp" />
+
+
+                </FrameLayout>
 
 
                 <androidx.appcompat.widget.Toolbar

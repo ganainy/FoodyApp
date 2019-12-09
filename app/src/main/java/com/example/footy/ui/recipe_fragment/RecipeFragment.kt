@@ -88,9 +88,17 @@ class RecipeFragment : Fragment() {
 
         //set favorite image depending on is meal in favorites or not
         viewModel.isFavorite.observe(this, Observer {
-            if (it) binding.favoriteImage.setImageResource(R.drawable.ic_favorite_red)
-            else binding.favoriteImage.setImageResource(R.drawable.ic_favorite_white)
+            if (it) {
+                //show animation
+                binding.favoriteAnimation.speed = 1f
+                binding.favoriteAnimation.playAnimation()
+            } else {
+                //show animation in reverse
+                binding.favoriteAnimation.speed = -1f
+                binding.favoriteAnimation.playAnimation()
+            }
         })
+
 
         //this state used to show loading or internt error in layout
         viewModel.recipeLoadState.observe(this, Observer {

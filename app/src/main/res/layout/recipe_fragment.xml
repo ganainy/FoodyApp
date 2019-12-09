@@ -304,15 +304,18 @@
                             android:layout_height="0dp"
                             android:layout_weight="1" />
 
-                        <ImageView
-                            android:id="@+id/favoriteImage"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:onClick="@{()-> viewModel.addOrDeleteToDB(recipe.meals[0])}"
-                            android:src="@drawable/ic_favorite_white" />
 
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/favoriteAnimation"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:onClick="@{()-> viewModel.addOrDeleteToDB(recipe.meals[0])}"
+                            android:layout_marginTop="-8dp"
+                            android:scaleType="fitXY"
+                            app:lottie_autoPlay="false"
+                            app:lottie_loop="false"
+                            app:lottie_rawRes="@raw/favourite"
+                            app:lottie_speed="1" />
 
                     </LinearLayout>
 

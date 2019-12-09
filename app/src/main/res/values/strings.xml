@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">Footy</string>
+    <string name="app_name">Foody</string>
     <string name="meal_categories">Meal categories</string>
+
 </resources>
