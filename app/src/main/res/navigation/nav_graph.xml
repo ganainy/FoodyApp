@@ -10,6 +10,7 @@
         android:label="home_fragment"
         tools:layout="@layout/home_fragment">
         <action
+            android:id="@+id/action_homeFragment_to_categoryFragment"
             app:destination="@id/categoryFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -40,6 +41,7 @@
             android:name="selectedCategory"
             app:argType="com.example.footy.network.Category" />
         <action
+            android:id="@+id/action_categoryFragment_to_recipeFragment"
             app:destination="@id/recipeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -53,6 +55,7 @@
         android:name="com.example.footy.ui.favourite_meals_fragment.FavouritesFragment"
         android:label="FavouritesFragment">
         <action
+            android:id="@+id/action_favouritesFragment_to_offlineRecipeFragment"
             app:destination="@id/offlineRecipeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
