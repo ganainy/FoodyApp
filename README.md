@@ -7,6 +7,7 @@ Kotlin <br>
 MVVM architecture <br>
 Navigation library and navigation safe-args  <br> 
 Databinding library<br> 
+Room database<br> 
 Coroutines <br>
 Networking with retrofit <br> 
 Image caching with glide <br>
