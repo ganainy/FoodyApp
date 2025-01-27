@@ -16,17 +16,18 @@ Drawer layout , Collapsing toolbar <br>
 
 Video preview:<br>
 -------------------
-https://www.kapwing.com/videos/5deedaa4326760001451d182 [1:36]
+<img src="https://github.com/ganainy/FoodyApp/blob/master/gif_app_preview.gif" alt="App Preview" width="400"/>
 
 Images:<br>
 -------------------
-To better understand app watch video above<br>
-<img src="https://cdn.discordapp.com/attachments/566581417606119424/653740577195819009/screenshot-1575931635154.jpg" width="350" ><br>
+<img src="https://github.com/ganainy/FoodyApp/blob/master/preview_images/screenshot-1575931635154.jpg" alt="App Screenshot-1" width="400"/>
 
-<img src="https://cdn.discordapp.com/attachments/566581417606119424/653742273435271169/screenshot-1575931675226.jpg" width="350" ><br>
+<img src="https://github.com/ganainy/FoodyApp/blob/master/preview_images/screenshot-1575931675226.jpg" alt="App Screenshot-2" width="400"/>
 
-<img src="https://cdn.discordapp.com/attachments/566581417606119424/653742385897144320/screenshot-1575931722842.jpg" width="350" ><br>
 
-<img src="https://cdn.discordapp.com/attachments/566581417606119424/653742594089680916/screenshot-1575931761555.jpg" width="350" ><br>
+<img src="https://github.com/ganainy/FoodyApp/blob/master/preview_images/screenshot-1575931722842.jpg" alt="App Screenshot-3" width="400"/>
 
-<img src="https://cdn.discordapp.com/attachments/566581417606119424/653742564742004753/screenshot-1575931873458.jpg" width="350" ><br>
+<img src="https://github.com/ganainy/FoodyApp/blob/master/preview_images/screenshot-1575931761555.jpg" alt="App Screenshot-4" width="400"/>
+
+<img src="https://github.com/ganainy/FoodyApp/blob/master/preview_images/screenshot-1575931873458.jpg" alt="App Screenshot-5" width="400"/>
+
